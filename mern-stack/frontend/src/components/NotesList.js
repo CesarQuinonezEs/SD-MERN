@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { format } from 'timeago.js'
 import { Link } from 'react-router-dom'
-
+const API_URI = 'https://sdbackend.onrender.com/api/notes/';
 export default class NotesList extends Component {
     state = {
         notes: []
@@ -12,11 +12,11 @@ export default class NotesList extends Component {
         this.getNotes()
     }
     async getNotes() {
-        const res = await axios.get('http://localhost:4000/api/notes')
+        const res = await axios.get(API_URI)
         this.setState({ notes: res.data })
     }
     deleteNote = async (id) => {
-        await axios.delete('http://localhost:4000/api/notes/' + id);
+        await axios.delete(API_URI + id);
         this.getNotes();
     }
 

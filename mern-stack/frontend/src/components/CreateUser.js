@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+const URI = 'https://sdbackend.onrender.com/api/users/';
 
 export default class CreateUser extends Component {
     state = {
@@ -13,15 +14,15 @@ export default class CreateUser extends Component {
         console.log(this.state.users);
     }
     getUsers = async () => {
-        const res = await axios.get('http://localhost:4000/api/users');
+        const res = await axios.get(URI);
         this.setState({ users: res.data });
     }
     onSubmit = async e => {
         e.preventDefault();
         if(this.state.edting){
-         await axios.put('http://localhost:4000/api/users/'+this.state._id,{username: this.state.username})
+         await axios.put(URI+this.state._id,{username: this.state.username})
         }else{
-        await axios.post('http://localhost:4000/api/users', {
+        await axios.post(URI, {
             username: this.state.username
         })
         }
@@ -31,18 +32,18 @@ export default class CreateUser extends Component {
     }
 
     deleteUser = async (id) => {
-        await axios.delete('http://localhost:4000/api/users/' + id);
+        await axios.delete(URI + id);
         this.getUsers();
     }
     getUser = async (id) =>{
-        const res = await axios.get('http://localhost:4000/api/users/'+id);
+        const res = await axios.get(URI+id);
         this.setState({username: res.data.username});
         this.setState({edting: true});
         this.setState({_id: id});
     }
     editUser = async (id) => {
         this.getUser(id);
-        await axios.put('http://localhost:4000/api/users/'+id);
+        await axios.put(URI+id);
         this.getUsers();
     }
     onChangeUsername = (e) => {

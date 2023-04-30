@@ -3,7 +3,8 @@ import axios from 'axios'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-
+const URI_USER = 'https://sdbackend.onrender.com/api/users/';
+const URI_NOTE = 'https://sdbackend.onrender.com/api/notes/';
 
 
 export default class CreateNote extends Component {
@@ -19,7 +20,7 @@ export default class CreateNote extends Component {
 
     }
     async componentDidMount(){
-        const res = await axios.get('http://localhost:4000/api/users')
+        const res = await axios.get(URI_USER)
         this.setState({
            users: res.data,
            userSelected: res.data[0].username
@@ -27,7 +28,7 @@ export default class CreateNote extends Component {
         if(this.props.match.params.id){
             const id = this.props.match.params.id;
             console.log(id);
-            const res = await axios.get('http://localhost:4000/api/notes/' + id);
+            const res = await axios.get(URI_NOTE + id);
             this.setState({
                 title: res.data.title,
                 content: res.data.content,
@@ -50,9 +51,9 @@ export default class CreateNote extends Component {
             author: this.state.userSelected
         }
         if(this.state.editing){
-            await axios.put('http://localhost:4000/api/notes/' + this.state._id, newNote)
+            await axios.put(URI_NOTE + this.state._id, newNote)
         }else{
-            await axios.post('http://localhost:4000/api/notes', newNote);
+            await axios.post(URI_NOTE, newNote);
         }
 
 
