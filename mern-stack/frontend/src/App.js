@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
 import Navigation from './components/Navigation';
 import NotesList from './components/NotesList';
@@ -11,15 +11,13 @@ import EditNote from './components/EditNote';
 function App() {
   return (
     <Router>
-      <Navigation/>
-      <Routes>
-      
-      <Route path="/"  element={<NotesList/>} />
-      <Route path="/edit/:id" element={<EditNote/>} />
-      <Route path="/create" element={<CreateNote/>} />
-      <Route path="/user" element={<CreateUser/>} />
-      </Routes>
-    </Router>
+    <Navigation/>
+    <Route path="/" exact component={NotesList} />
+    <Route path="/edit/:id" component={CreateNote} />
+    <Route path="/create" component={CreateNote} />
+    <Route path="/user" component={CreateUser} />
+  </Router>
+
 
   );
 }

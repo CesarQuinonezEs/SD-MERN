@@ -24,9 +24,8 @@ export default class CreateNote extends Component {
            users: res.data,
            userSelected: res.data[0].username
         })
-        console.log("id: ",this.props.match.params.id);
         if(this.props.match.params.id){
-            
+            console.log(typeof(this.props.match.params.id));
             const res = await axios.get('http://localhost:4000/api/notes/' + this.props.params.id);
             this.setState({
                 title: res.data.title,
