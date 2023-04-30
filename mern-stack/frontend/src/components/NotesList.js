@@ -38,7 +38,7 @@ export default class NotesList extends Component {
                                 <div className="card-body">
                                     <p>{note.content}</p>
                                     <p>{note.author}</p>
-                                    <p>{format(note.date)}</p>
+                                    <p>{format(note.updatedAt)}</p>
                                 </div>
                                 <div className="card-footer">
                                     <button

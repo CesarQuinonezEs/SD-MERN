@@ -16,5 +16,14 @@ usersCtrl.deleteUser = async (req, res) => {
     await User.findByIdAndDelete(req.params.id);
     res.json({message: 'User Deleted'})
 }
+usersCtrl.getUser = async (req, res) =>{
+    const user = await User.findById(req.params.id);
+    res.json(user)
+}
+usersCtrl.editUser = async (req, res) =>{
+    const {username} = req.body;
+    await User.findByIdAndUpdate({_id:req.params.id},{username});
+    res.json({message: 'updated'})
+}
 
 module.exports = usersCtrl;

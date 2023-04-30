@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Link, useParams } from "react-router-dom"
 import axios from 'axios'
+
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -25,8 +25,9 @@ export default class CreateNote extends Component {
            userSelected: res.data[0].username
         })
         if(this.props.match.params.id){
-            console.log(typeof(this.props.match.params.id));
-            const res = await axios.get('http://localhost:4000/api/notes/' + this.props.params.id);
+            const id = this.props.match.params.id;
+            console.log(id);
+            const res = await axios.get('http://localhost:4000/api/notes/' + id);
             this.setState({
                 title: res.data.title,
                 content: res.data.content,
